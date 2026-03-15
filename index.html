@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student E-Portfolio System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">E-Portfo<span>lio.</span></div>
+        <div class="nav-links">
+            <button id="theme-toggle" class="btn-icon">
+                <i class="fas fa-moon"></i>
+            </button>
+            <button id="share-url-btn" class="btn-nav" title="Get Portfolio URL" onclick="navigator.clipboard.writeText(window.location.href); if(typeof showToast === 'function') showToast('Portfolio URL copied to clipboard!'); else alert('Portfolio URL copied to clipboard!');">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+            <button id="logout-btn" class="btn-nav hidden">Logout</button>
+        </div>
+    </nav>
+
+    <!-- AUTH SECTION -->
+    <section id="auth-section" class="container">
+        <div class="cards-container">
+            <div class="form-box login-card" id="login-card">
+                <div class="form-header">
+                    <h2>Login</h2>
+                    <div class="underline"></div>
+                </div>
+                <form id="auth-form-login">
+                    <div class="input-group">
+                        <input type="text" id="username-login" placeholder=" " required>
+                        <label for="username-login">Username</label>
+                        <i class="fas fa-user"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password-login" placeholder=" " required>
+                        <label for="password-login">Password</label>
+                        <i class="fas fa-lock"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-animate">
+                        <span>Login</span>
+                    </button>
+                </form>
+                <p id="auth-switch">
+                    <span id="auth-text">Don't have an account?</span> 
+                    <a href="login&register" id="auth-link" class="link-underline">Register</a>
+                </p>
+            </div>
+
+            <div class="form-box register-card hidden-card" id="register-card">
+                <div class="form-header">
+                    <h2>Register</h2>
+                    <div class="underline"></div>
+                </div>
+                <form id="auth-form-register">
+                    <div class="input-group">
+                        <input type="text" id="username-register" placeholder=" " required>
+                        <label for="username-register">Username</label>
+                        <i class="fas fa-user"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password-register" placeholder=" " required>
+                        <label for="password-register">Password</label>
+                        <i class="fas fa-lock"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-animate">
+                        <span>Register</span>
+                    </button>
+                </form>
+                <p id="auth-switch-register">
+                    <span id="auth-text-register">Already have an account?</span> 
+                    <a href="login&register" id="auth-link-login" class="link-underline">Login</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD (EDITOR) SECTION -->
+    <section id="dashboard-section" class="container hidden">
+        <div class="dashboard-header slide-down">
+            <h1><i class="fas fa-edit"></i> Edit Your Portfolio</h1>
+            <p>Fill in your details to create your professional portfolio</p>
+        </div>
+        
+        <form id="portfolio-form" class="fade-in">
+            <!-- Basic Info Row -->
+            <div class="form-group pop-in" style="animation-delay: 0.1s;">
+                <h3><i class="fas fa-user-circle"></i> Personal Information</h3>
+                <div class="form-row">
+                    <div class="input-group full-width">
+                        <input type="text" id="full-name" placeholder=" ">
+                        <label for="full-name">Full Name</label>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <div class="input-group full-width">
+                        <input type="text" id="job-title" placeholder=" ">
+                        <label for="job-title">Job Title / Major</label>
+                        <div class="input-highlight"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group textarea-group full-width">
+                        <textarea id="intro-text" placeholder=" " rows="3"></textarea>
+                        <label for="intro-text">Write your introduction...</label>
+                        <div class="input-highlight"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="file-upload full-width">
+                        <label><i class="fas fa-camera"></i> Profile Picture:</label>
+                        <input type="file" id="profile-pic" accept="image/*" hidden>
+                        <div class="file-preview" id="file-preview" style="min-height: 150px;">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click or drag to upload</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div class="form-group pop-in" style="animation-delay: 0.2s;">
+                <h3><i class="fas fa-code"></i> Skills</h3>
+                <div class="form-row">
+                    <div class="skills-section full-width">
+                        <div class="input-group">
+                            <input type="text" id="skills-input" placeholder=" ">
+                            <label for="skills-input">e.g., Java, HTML, Photoshop</label>
+                            <div class="input-highlight"></div>
+                        </div>
+                        <div class="skills-preview" id="skills-preview"></div>
+<button type="button" id="add-skills-btn" class="btn btn-secondary btn-animate" style="margin-top: 15px;">
+                            <span>Add Skills +</span>
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Links -->
+            <div class="form-group pop-in" style="animation-delay: 0.25s;">
+                <h3><i class="fas fa-share-alt"></i> Social Links</h3>
+                <div class="form-row">
+                    <div class="social-section full-width">
+                        <div class="form-row-4">
+                            <div class="input-group social-input">
+                                <input type="text" id="social-ig" placeholder=" ">
+                                <label for="social-ig">Instagram URL</label>
+                                <i class="fab fa-instagram"></i>
+                                <div class="input-highlight"></div>
+                            </div>
+                            <div class="input-group social-input">
+                                <input type="text" id="social-fb" placeholder=" ">
+                                <label for="social-fb">Facebook URL</label>
+                                <i class="fab fa-facebook"></i>
+                                <div class="input-highlight"></div>
+                            </div>
+                            <div class="input-group social-input">
+                                <input type="text" id="social-x" placeholder=" ">
+                                <label for="social-x">X (Twitter) URL</label>
+                                <i class="fab fa-twitter"></i>
+                                <div class="input-highlight"></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Projects Row -->
+            <div class="form-group pop-in" style="animation-delay: 0.3s;">
+                <h3><i class="fas fa-certificate"></i> Certifications </h3>
+                <div class="form-row">
+                    <div class="file-upload full-width">
+                        <label><i class="fas fa-image"></i> Certificate Image:</label>
+                        <input type="file" id="project-file" accept="image/*" hidden>
+                        <div class="file-preview" id="project-preview" style="min-height: 150px;">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Click or drag to upload</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row project-fields">
+                    <div class="input-group">
+                        <input type="text" id="project-title" placeholder=" ">
+                        <label for="project-title">Project Title</label>
+                        <i class="fas fa-heading"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" id="project-link" placeholder=" ">
+                        <label for="project-link">Project URL (optional)</label>
+                        <i class="fas fa-link"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="input-group textarea-group full-width">
+                        <textarea id="project-desc" placeholder=" " rows="3"></textarea>
+                        <label for="project-desc">Description</label>
+                        <i class="fas fa-align-left"></i>
+                        <div class="input-highlight"></div>
+                    </div>
+                </div>
+                <button type="button" id="add-project-btn" class="btn btn-secondary btn-animate">
+                    <span>Add Project</span>
+                    <i class="fas fa-plus"></i>
+                </button>
+                <ul id="project-list" class="project-list"></ul>
+            </div>
+
+            <div class="button-group">
+                <button type="button" id="save-btn" class="btn btn-secondary btn-animate">
+                    <span>Save</span>
+                    <i class="fas fa-save"></i>
+                </button>
+                <button type="button" id="view-btn" class="btn btn-primary btn-animate">
+                    <span>View Portfolio</span>
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- PUBLIC PORTFOLIO VIEW -->
+    <section id="portfolio-view" class="hidden">
+        <header class="portfolio-header">
+            <div class="wave">
+                <svg viewBox="0 0 1440 320" preserveAspectRatio="none">
+                    <path fill="var(--card-bg)" fill-opacity="1" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,224C672,245,768,267,864,261.3C960,256,1056,224,1152,197.3C1248,171,1344,149,1392,138.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+                </svg>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Sliding Sidebar with Tabs - Left Corner -->
+            <div class="sidebar-tabs-wrapper" id="sidebar-tabs-wrapper">
+                <div class="sidebar-tabs-header">
+                    <span>Menu</span>
+                </div>
+                <div class="tab-navigation sidebar-tabs">
+                    <button class="tab-btn active" data-tab="intro">
+                        <span>Introduction</span>
+                    </button>
+                    <button class="tab-btn" data-tab="skills">
+                        <i class="fas fa-lightbulb"></i>
+                        <span>Skills</span>
+                    </button>
+                    <button class="tab-btn" data-tab="socials">
+                        <i class="fas fa-share-alt"></i>
+                        <span>Socials</span>
+                    </button>
+                    <button class="tab-btn" data-tab="certifications">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certifications</span>
+                    </button>
+                </div>
+                <div class="sidebar-actions">
+                    <button id="sidebar-edit-btn" class="sidebar-action-btn">
+                        <i class="fas fa-edit"></i>
+                        <span>Edit Profile</span>
+                    </button>
+                    <button id="sidebar-logout-btn" class="sidebar-action-btn logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Left side: Profile then Back button -->
+            <div class="view-sidebar">
+                <div class="profile-container">
+                    <div class="profile-pic-wrapper">
+                        <img id="view-pic" src="" alt="Profile Picture">
+                        <div class="pic-overlay">
+                            <p class="pf-handle" id="overviewUsername"></p>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <h1 id="view-name"></h1>
+                        <h3 id="view-title"></h3>
+                        <div class="social-icons" id="view-socials"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right side: Content -->
+            <div class="view-content">
+                <!-- Cards Container -->
+                <div class="cards-container">
+                    <!-- Introduction Card -->
+                    <div class="card slide-in float-up active" id="card-intro" style="animation-delay: 0.1s;">
+                        <div class="card-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h2>About Me</h2>
+                        <p id="view-intro"></p>
+                    </div>
+
+                    <!-- Skills Card -->
+                    <div class="card slide-in float-up" id="card-skills" style="animation-delay: 0.2s;">
+                        <div class="card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h2>Skills</h2>
+                        <div class="tags" id="view-skills"></div>
+                    </div>
+
+                    <!-- Socials Card -->
+                    <div class="card slide-in float-up" id="card-socials" style="animation-delay: 0.25s;">
+                        <div class="card-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <h2>Social Links</h2>
+                        <div class="social-links-container" id="view-socials-cards"></div>
+                    </div>
+
+                    <!-- Certifications Card -->
+                    <div class="card full-width slide-in float-up" id="card-certifications" style="animation-delay: 0.3s;">
+                        <div class="card-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h2>Certifications</h2>
+                        <div class="projects-grid" id="view-projects"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- Certification Modal -->
+    <div id="cert-modal" class="modal hidden">
+        <span class="modal-close" id="modal-close-btn">&times;</span>
+        <div class="modal-content">
+            <div id="modal-image-container"></div>
+            <h2 id="modal-title"></h2>
+            <p id="modal-description"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+<!-- https://www.instagram.com/cxlcyy.ween?igsh=bXc1bmd1Njdpczg3&utm_source=qr -->
+<!-- https://www.facebook.com/share/1Gin661Nsm/?mibextid=wwXIfr -->
